@@ -1,5 +1,11 @@
 import './style.css';
 import { setupCounter } from './counter';
+import { registerMockServer } from './_mocks/browser';
+import axios from 'axios';
+import { Todo } from './models/todo';
+
+// 지우기 말기 (테스트용 서버 실행)
+registerMockServer();
 
 const CountCard = `
   <div class="card">
@@ -16,5 +22,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     ${CountCard}
   </div>
 `;
+
+const exampleAPI = async () => {
+  const { data } = await axios.get<Todo[]>('/todo');
+  return data;
+};
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
