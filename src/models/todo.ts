@@ -7,4 +7,16 @@ export interface Todo {
   creator: string;
   deadline: string;
   createAt: string;
+  id: string;
 }
+
+/* 
+    {
+    title: string;
+    description: string;
+    priority: Priority;
+    creator: string;
+    deadline: string;
+    }
+*/
+export type CreateTodoRequest = Omit<Todo, 'id' | 'createAt'>;
