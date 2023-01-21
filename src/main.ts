@@ -1,31 +1,34 @@
+import './_mocks/browser';
 import './style.css';
-import { setupCounter } from './counter';
-import { registerMockServer } from './_mocks/browser';
-import axios from 'axios';
-import { Todo } from './models/todo';
 
-// 지우기 말기 (테스트용 서버 실행)
-registerMockServer();
+import { assert } from './utils/assert';
+import { listenRouting } from './utils/router';
 
-const CountCard = `
-  <div class="card">
-    <button id="counter" type="button"></button>
-  </div>
-`;
+async function loadCurrentPage() {
+  const path = window.location.pathname.replace('/', '');
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <h1>Ray + Goo</h1>
-    ${CountCard}
-  </div>
-`;
+  try {
+    const Page = await import(/* @vite-ignore */ `./pages/${path}`);
 
-const exampleAPI = async () => {
-  const { data } = await axios.get<Todo[]>('/todo');
-  return data;
-};
+    return new Page.default();
+  } catch {
+    const Page = await import('./pages/404');
+    return new Page.default();
+  }
+}
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+async function renderPage(target: HTMLElement) {
+  const page = await loadCurrentPage();
+
+  // Clear Target
+  target.innerHTML = '';
+  // Render
+  target.appendChild(page.Element);
+}
+
+const App = document.querySelector<HTMLDivElement>('#app');
+
+assert(App != null, '최상단 Parent Node가 존재하지 않습니다.');
+
+renderPage(App);
+listenRouting(() => renderPage(App));
