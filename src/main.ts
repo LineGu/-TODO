@@ -1,31 +1,11 @@
+import './_mocks/browser';
 import './style.css';
-import { setupCounter } from './counter';
-import { registerMockServer } from './_mocks/browser';
-import axios from 'axios';
-import { Todo } from './models/todo';
 
-// 지우기 말기 (테스트용 서버 실행)
-registerMockServer();
+import { assert } from './utils/assert';
+import { renderPage } from './view-engines';
 
-const CountCard = `
-  <div class="card">
-    <button id="counter" type="button"></button>
-  </div>
-`;
+const App = document.querySelector<HTMLDivElement>('#app');
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <h1>Ray + Goo</h1>
-    ${CountCard}
-  </div>
-`;
+assert(App != null, '최상단 Parent Node가 존재하지 않습니다.');
 
-const exampleAPI = async () => {
-  const { data } = await axios.get<Todo[]>('/todo');
-  return data;
-};
-
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+renderPage(App);

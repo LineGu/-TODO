@@ -12,3 +12,5 @@ export const registerMockServer = async () => {
     });
   }
 };
+
+registerMockServer();
