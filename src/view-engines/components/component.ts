@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { assert } from '../../utils/assert';
 import { ComponentBase } from './componentBase';
-import { VIRTUAL_DOM_ID } from './constants';
+import { COMPONENT_STORE, VIRTUAL_DOM_ID } from './constants';
 
 // 사용자 인터페이스 정의
 export abstract class Component extends ComponentBase {
