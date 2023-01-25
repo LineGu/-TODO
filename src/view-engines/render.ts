@@ -13,6 +13,7 @@ async function loadCurrentPage(): Promise<Component> {
 
     return new Page.default();
   } catch (err) {
+    // TODO: err 고도화. Not Found와 일반에러 구분
     console.log(err);
     const Page = await import(`${PAGE_BASE_PATH}/404`);
     return new Page.default();
