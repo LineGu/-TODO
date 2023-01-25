@@ -1,6 +1,4 @@
-import { Component } from '../abstracts/component';
-import { State } from '../decorators/state';
-import { pushTo } from '../utils/router';
+import { State, Component, pushTo } from '../view-engines';
 
 export default class CreatePage extends Component {
   constructor() {

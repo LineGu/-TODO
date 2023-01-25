@@ -8,7 +8,7 @@ export function State(target: any, propertyKey: string) {
   const setter = function (this: { get: () => unknown; set: (newValue: unknown) => void }, newValue: any) {
     if (value !== newValue) {
       value = newValue;
-      target.render.call(this);
+      target.freshNode.call(this);
     }
   };
 

@@ -1,4 +1,4 @@
-import { Component } from '../abstracts/component';
+import { Component } from '../view-engines';
 
 export default class ListPage extends Component {
   constructor() {

@@ -2,7 +2,7 @@ import './_mocks/browser';
 import './style.css';
 
 import { assert } from './utils/assert';
-import { renderPage } from './abstracts/component';
+import { renderPage } from './view-engines';
 
 const App = document.querySelector<HTMLDivElement>('#app');
 

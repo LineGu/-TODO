@@ -1,5 +1,4 @@
-import { Component } from '../abstracts/component';
-import { pushTo } from '../utils/router';
+import { Component, pushTo } from '../view-engines';
 
 export default class NotFoundPage extends Component {
   constructor() {
