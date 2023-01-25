@@ -1,4 +1,5 @@
 import { Component } from '../abstracts/component';
+import { pushTo } from '../utils/router';
 
 export default class NotFoundPage extends Component {
   constructor() {
@@ -9,7 +10,38 @@ export default class NotFoundPage extends Component {
     return `
     <div>
         <span>NOT FOUND</span>
-        <button>돌아가기</button>
+        <${BackButton.CS}>
+          <${Text.CS}></${Text.CE}>
+        </${BackButton.CE}>
     </div>`;
+  }
+}
+
+class BackButton extends Component {
+  constructor() {
+    super();
+  }
+
+  createElement({ children }: { children: string }) {
+    return `<button>${children}</button>`;
+  }
+
+  events = [
+    {
+      type: 'click',
+      callback: () => {
+        pushTo('/create');
+      },
+    },
+  ];
+}
+
+class Text extends Component {
+  constructor() {
+    super();
+  }
+
+  createElement() {
+    return `<span>돌아가기</span>`;
   }
 }
